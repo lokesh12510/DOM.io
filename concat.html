@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+
+<body>
+    <section>
+        <h1 id="section_1"></h1>
+
+        <input type="text" placeholder="name" id="name">
+        <button type="submit">submit</button>
+
+    </section>
+    <script>
+        const h1 = document.getElementById('section_1');
+        const name = document.getElementById('name').value;
+
+        console.log(name);
+        console.log(typeof(name));
+
+        var str = 'lokesh';
+        var str2 = 'dev';
+
+        console.log(typeof(str));
+
+        concat = (x, y) => {
+
+            if (typeof(x) == 'string' && typeof(y) == 'string') {
+                let z = x + y;
+                return z;
+            } else {
+                console.log("Enter Valid Name");
+            }
+        }
+
+        res = concat(str, str2);
+        console.log(res)
+    </script>
+</body>
+
+</html>

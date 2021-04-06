@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+
+<body>
+    <section>
+        <h1>Letter Counter</h1>
+    </section>
+    <script>
+        let str1 = 'Baggs full of Basket balls Bb';
+        let find = 'B';
+
+        counter = (str, f) => {
+            var count = 0;
+            str = str.toLowerCase()
+            f = f.toLowerCase()
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] === f) {
+                    count += 1;
+                }
+            }
+            return count;
+        }
+
+        res = counter(str1, find);
+        console.log(str1);
+        console.log(res);
+    </script>
+</body>
+
+</html>
