@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background-color: #cae3ff;
+        }
+
+        .container {
+            background-color: #f8f4f4;
+            border-radius: 20px;
+        }
+
+        #card {
+            width: 400px;
+            background-color: #f1eded;
+            padding: 40px 30px;
+            margin-bottom: 50px;
+        }
+
+        img {
+            border-radius: 50%;
+        }
+
+        button {
+            border: none;
+            background-color: #6046f3;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #f1eded;
+            font-weight: bold;
+            transition: .2s linear;
+        }
+
+        button:hover {
+            border: 1px solid #6046f3;
+            background-color: #fff;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Our Reviews</h2>
+
+        <div id="card">
+
+        </div>
+        <div class="action-btn">
+            <button id="prev">ᐸ </button>
+            <button id="sup">Suprise me</button>
+            <button id="nxt">ᐳ</button>
+        </div>
+
+        <script>
+            "use strict";
+            const card = document.querySelector("#card");
+            const people = [
+                {
+                    id: 1,
+                    name: "Lokesh",
+                    job: "Web developer",
+                    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque corrupti nulla, id sit pariaturnumquam molestias minima quasi similique ab corporis ducimus earum modi libero tempore aliquid vitae",
+                },
+                {
+                    id: 2,
+                    name: "Krish",
+                    job: "Designer",
+                    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque corrupti nulla, id sit pariaturnumquam molestias minima quasi similique ab corporis ducimus earum modi libero tempore aliquid vitae",
+                },
+                {
+                    id: 3,
+                    name: "Dev",
+                    job: "App Developer",
+                    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque corrupti nulla, id sit pariaturnumquam molestias minima quasi similique ab corporis ducimus earum modi libero tempore aliquid vitae",
+                },
+                {
+                    id: 4,
+                    name: "Loke",
+                    job: "Web developer",
+                    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque corrupti nulla, id sit pariaturnumquam molestias minima quasi similique ab corporis ducimus earum modi libero tempore aliquid vitae",
+                },
+                {
+                    id: 5,
+                    name: "Kri",
+                    job: "Designer",
+                    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque corrupti nulla, id sit pariaturnumquam molestias minima quasi similique ab corporis ducimus earum modi libero tempore aliquid vitae",
+                },
+                {
+                    id: 6,
+                    name: "D",
+                    job: "App Developer",
+                    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque corrupti nulla, id sit pariaturnumquam molestias minima quasi similique ab corporis ducimus earum modi libero tempore aliquid vitae",
+                },
+            ];
+
+            let count = 0
+            window.addEventListener("DOMContentLoaded", function () {
+                cards(count)
+            })
+            function cards(newCard) {
+                const markup = `
+                    <div class="profile-img">
+                        <img src="https://via.placeholder.com/100" alt="">
+                    </div>
+                    <h2>${people[newCard].name}</h2>
+                    <h5>${people[newCard].job}</h5>
+                    <p>${people[newCard].desc}</p>
+                    </div>
+                `;
+
+                card.innerHTML = markup;
+            }
+
+            const btns = document.querySelectorAll('button')
+
+
+            btns.forEach((btn) => {
+                btn.addEventListener('click', (e) => {
+                    const action = e.currentTarget.id
+                    if(action === "nxt") {
+                        slidenxt()
+                    } else if(action === "prev") {
+                        slideprev()
+                    } else {
+                        slideRandom()
+                    }
+                })
+            })
+
+
+            function slidenxt() {
+                count++
+                if(count > people.length - 1) {
+                    count = 0
+                }
+                return cards(count);
+            }
+            function slideprev() {
+                count--
+                if(count < 0) {
+                    count = people.length - 1
+                }
+                return cards(count);
+            }
+            function slideRandom() {
+                let newcount = Math.floor(Math.random() * (people.length))
+                //just tried for unique random number alone
+                if(newcount != count) {
+                    console.log(newcount)
+                    return cards(newcount);
+                } else if(newcount === count) {
+                    newcount++;
+                    if(newcount === count) {
+                        newcount -= 2
+                    }
+                    console.log(newcount)
+                    return cards(newcount)
+                }
+
+            }
+
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the number</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 20px 100px;
+            text-align: center;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .col {
+            width: 70%;
+        }
+
+        input,
+        button {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        input {
+            width: 400px;
+            text-align: center;
+            font-size: 4rem;
+        }
+
+        button {
+            margin-top: 50px;
+            width: 200px;
+        }
+
+        h2 {
+            padding: 30px;
+        }
+
+        .row {
+            margin: 40px
+        }
+
+        .form {
+            margin-top: 90px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Guess the number</h2>
+
+        <div class="row">
+            <div>
+                <h2>Result</h2>
+                <h2 id="result"></h2>
+            </div>
+            <div>
+                <h2 id="turn">Try </h2>
+                <h4 id="high">Highscore : </h4>
+            </div>
+        </div>
+        <div class="row form">
+            <div class="col">
+                <h2 class="hide" id="finalmsg">The placeholder message</h2>
+                <input type="text" autofocus="true" required><br>
+                <button type="submit">Check</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const btn = document.querySelector("button");
+        const input = document.querySelector("input");
+        const result = document.querySelector("#result");
+        const turn = document.querySelector("#turn");
+        const final = document.querySelector("#finalmsg");
+        const high = document.querySelector("#high");
+        let count = 1;
+
+        let randomNum = Math.floor(Math.random() * 20);
+
+        window.addEventListener("load", () => {
+            btn.disabled = "true";
+        });
+
+        input.addEventListener("input", function () {
+            if(input.value.length == 0) {
+                btn.disabled = true;
+            } else {
+                btn.disabled = false;
+            }
+        });
+
+        btn.addEventListener("click", () => {
+            if(count <= 5) {
+                console.log("check");
+                checkGuess();
+            } else {
+                resetGame();
+            }
+            btn.disabled = true;
+            count++;
+            input.value = "";
+            input.focus();
+        });
+
+        function checkGuess() {
+            let userGuess = Number(input.value);
+            if(count === 1) {
+                turn.textContent = "prev:";
+            }
+            turn.textContent += userGuess + " ";
+            console.log(randomNum, turn);
+            if(userGuess === randomNum) {
+                final.textContent = "You won";
+                final.classList.remove("hide");
+                final.style.backgroundColor = "green";
+                result.textContent = "";
+                resetGame();
+            } else {
+                if(userGuess < randomNum) {
+                    result.textContent = "too low!";
+                } else if(userGuess > randomNum) {
+                    result.textContent = "too high";
+                }
+            }
+        }
+
+        function resetGame() {
+            final.textContent = "Game Over";
+            final.classList.remove("hide");
+            count = 0;
+            input.classList.add("hide");
+            btn.classList.add("hide");
+            btn2 = document.createElement("button");
+            btn2.innerText = "try again";
+            final.append(btn2);
+            btn2.addEventListener("click", reset);
+        }
+
+        function reset() {
+            btn2.classList.add("hide");
+            final.classList.add("hide");
+            input.classList.remove("hide");
+            btn.classList.remove("hide");
+            btn.disabled = "true";
+            turn.textContent = 'prev :'
+        }
+
+    </script>
+</body>
+
+</html>

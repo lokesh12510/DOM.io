@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div>
+
+            <div>
+                <h1 id="num">0</h1>
+            </div>
+            <div class="row">
+                <button id="dec" type="button">decrement</button>
+                <button id="reset" type="button">Reset</button>
+                <button id="inc" type="button">increment</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const num = document.querySelector('#num');
+        const btns = document.querySelectorAll('Button')
+
+        let counter = 0
+
+        btns.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                action = e.currentTarget.id;
+
+                if(action === "inc") {
+                    counter++;
+                } else if(action === "dec") {
+                    counter--;
+                } else {
+                    counter = 0;
+                }
+
+                counter < 0 ? col = "red" : (counter > 0 ? col = "green" : col = "black")
+
+                num.style.color = col
+
+                num.textContent = counter
+            })
+        })
+
+
+
+    </script>
+</body>
+
+</html>

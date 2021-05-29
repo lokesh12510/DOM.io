@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu list</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="catos" class="row">
+            <button id="all">All</button>
+        </div>
+        <div id="menu" class="row">
+        </div>
+    </div>
+
+    <script>
+        const menu = document.querySelector('#menu')
+        const catos = document.querySelector('#catos')
+        const food = [
+            {
+                id: 1,
+                name: "chicken",
+                category: "non-veg"
+            },
+            {
+                id: 2,
+                name: "mutton",
+                category: "non-veg"
+            },
+            {
+                id: 3,
+                name: "fish",
+                category: "non-veg"
+            },
+            {
+                id: 4,
+                name: "dosa",
+                category: "veg"
+            },
+            {
+                id: 5,
+                name: "idly",
+                category: "veg"
+            },
+            {
+                id: 6,
+                name: "Sprite",
+                category: "cooldrinks"
+            },
+            {
+                id: 7,
+                name: "fresh juice",
+                category: "cooldrinks"
+            },
+        ]
+
+        window.addEventListener('DOMContentLoaded', function () {
+
+            const categoryList = food.reduce(function (values, item) {
+                if(!values.includes(item.category)) {
+                    values.push(item.category)
+                }
+                return values
+            }, ['all'])
+            const cats = categoryList.map(function (category) {
+                return `<button id=${category}>${category}</button>`
+            }).join("")
+            catos.innerHTML = cats
+
+            const btns = document.querySelectorAll("button")
+            btns.forEach((btn) => {
+                btn.addEventListener('click', (e) => {
+                    let action = e.currentTarget.id
+                    let foo = food.filter((lis) => {
+                        if(lis.category === action) {
+                            console.log(lis)
+                            return lis;
+                        }
+                    })
+                    if(action == 'all') {
+                        markup(food)
+                    } else {
+                        markup(foo)
+                    }
+                })
+            })
+        })
+
+        function markup(menuItems) {
+            let displayMenuItems = menuItems.map(function (item) {
+                return `
+                    <div class="card">
+                        <img src="https://via.placeholder.com/100/80" alt="">
+                        <h3>${item.name}</h3>
+                        <h3>${item.category}</h3>
+                    </div>`
+            })
+            displayMenuItems = displayMenuItems.join("")
+            menu.innerHTML = displayMenuItems
+
+        }
+        markup(food)
+    </script>
+</body>
+
+</html>
